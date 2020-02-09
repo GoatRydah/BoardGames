@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -19,6 +19,15 @@
   <ItemGroup>
     <ProjectReference Include="..\BoardGames.DataAccess\BoardGames.DataAccess.csproj" />
     <ProjectReference Include="..\BoardGames.Models\BoardGames.Models.csproj" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Folder Include="Pages\Manage\GameItems\" />
+    <Folder Include="Pages\Manage\Users\" />
+    <Folder Include="Pages\Manage\Types\" />
+    <Folder Include="Pages\Manage\Topics\" />
+    <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
 </Project>
