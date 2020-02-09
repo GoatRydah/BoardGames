@@ -7,13 +7,16 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link href="~/lib/font-awesome/css/all.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/jquery-ui.min.css" />
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" />
+    <link type="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
 </head>
 <body class="bg-dark text-light">
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-info border-bottom box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand text-white float-left" asp-area="" asp-page="/Index">
-                    <img src="~/images/die.png" alt="dice" style="width:5%;"/>
+                    <img src="~/images/die.png" alt="dice" style="width:5%;" />
                     <span>Board Games</span>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -28,9 +31,9 @@
                                 Manage
                             </a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item text-black" asp-page="/Manage/Topic/Index">Topics</a>
-                                <a class="dropdown-item text-black" asp-page="/Manage/Type/Index">Types</a>
-                                <a class="dropdown-item text-black" asp-page="/Manage/Games/Index">Game Items</a>
+                                <a class="dropdown-item text-black" asp-page="/Manage/Topics/Index">Topics</a>
+                                <a class="dropdown-item text-black" asp-page="/Manage/Types/Index">Types</a>
+                                <a class="dropdown-item text-black" asp-page="/Manage/GameItems/Index">Game Items</a>
                                 <a class="dropdown-item text-black" asp-page="/Manage/Users/Index">Users</a>
                             </div>
                         </li>
@@ -63,6 +66,10 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="https://cdn.tiny.cloud/1/cdc44dxo6vevabywpwc6zrdpvf2raz1hz4lhbsdt0uwlgc2w/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 
     @RenderSection("Scripts", required: false)
 </body>
