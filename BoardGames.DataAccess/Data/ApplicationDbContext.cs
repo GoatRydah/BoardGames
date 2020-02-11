@@ -15,5 +15,7 @@ namespace BoardGames.DataAccess
         }
 
         public DbSet<Topic> Topic { get; internal set; }
+        public DbSet<GameItem> GameItem { get; internal set; }
+        public DbSet<Models.Type> Type { get; internal set; }
     }
 }

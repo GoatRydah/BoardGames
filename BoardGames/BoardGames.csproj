@@ -25,7 +25,6 @@
 
 
   <ItemGroup>
-    <Folder Include="Pages\Manage\GameItems\" />
     <Folder Include="Pages\Manage\Users\" />
     <Folder Include="Pages\Manage\Types\" />
     <Folder Include="wwwroot\images\" />

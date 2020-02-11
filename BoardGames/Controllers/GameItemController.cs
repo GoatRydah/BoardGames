@@ -1,0 +1,67 @@
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using BoardGames.DataAccess.Data.Repository.IRepository;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+
+namespace BoardGames.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class GameItemController : Controller
+    {
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IWebHostEnvironment _hostingEnvironment;
+
+        public GameItemController(IUnitOfWork unitOfWork, IWebHostEnvironment hostingEnvironment)
+        {
+            _unitOfWork = unitOfWork;
+            _hostingEnvironment = hostingEnvironment;
+        }
+
+        [HttpGet]
+        public IActionResult Get()
+        {
+            //We cannot have a space between Category and FoodType after the 2 nulls cuz the Delete splits the string on the comma and the space blows it up.
+            return Json(new { data = _unitOfWork.GameItem.GetAll(null, null, "Topic,Type") });
+        }
+
+        private IActionResult Json(object p)
+        {
+            throw new NotImplementedException();
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            try
+            {
+                var objFromDb = _unitOfWork.GameItem.GetFirstOrDefault(s => s.Id == id);
+                if (objFromDb == null)
+                    return Json(new { success = false, message = "Error while deleting." });
+
+                //Physically remove any uploaded image
+                var imagePath =
+                    Path.Combine(_hostingEnvironment.WebRootPath, objFromDb.Image.TrimStart('\\'));
+
+                if (System.IO.File.Exists(imagePath))
+                {
+                    System.IO.File.Delete(imagePath);
+                }
+
+                _unitOfWork.GameItem.Remove(objFromDb);
+                _unitOfWork.Save();
+            }
+            catch (Exception)
+            {
+                return Json(new { success = false, message = "Error while deleting." });
+            }
+
+            return Json(new { success = true, message = "Delete successful." });
+        }
+    }
+}
