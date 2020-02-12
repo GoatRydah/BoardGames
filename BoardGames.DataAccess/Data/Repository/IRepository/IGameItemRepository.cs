@@ -7,9 +7,6 @@ namespace BoardGames.DataAccess.Data.Repository.IRepository
 {
     public interface IGameItemRepository : IRepository<GameItem>
     {
-        public interface IGameItemRepository : IRepository<GameItem>
-        {
-            void Update(GameItem gameItem);
-        }
+        void Update(GameItem gameItem);
     }
 }

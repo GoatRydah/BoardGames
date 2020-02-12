@@ -30,11 +30,6 @@ namespace BoardGames.Controllers
             return Json(new { data = _unitOfWork.GameItem.GetAll(null, null, "Topic,Type") });
         }
 
-        private IActionResult Json(object p)
-        {
-            throw new NotImplementedException();
-        }
-
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {

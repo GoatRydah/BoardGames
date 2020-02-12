@@ -1,0 +1,122 @@
+﻿@page
+@model BoardGames.Pages.Manage.GameItems.UpsertModel
+
+
+@*@using BoardGames.Utility
+@if (User.IsInRole(SD.ManagerRole))
+{*@
+    <form method="post" asp-action="Upsert" enctype="multipart/form-data">
+        <div class="container">
+            <div class="row px-2 mx-2 bg-white border">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                @if (Model.GameItemObj.gameItem.Id != 0)
+                {
+                    <input type="hidden" asp-for="GameItemObj.gameItem.Id" />
+                }
+                <div class="col-md-12 px-3" style="border-bottom:1px solid #325d88;">
+                    <h2 class="text-primary">@(Model.GameItemObj.gameItem.Id != 0 ? "Update" : "Create") Game Item</h2>
+                </div>
+                <div class="col-md-8 pt-3">
+                    <div class="row form-group">
+                        <div class="col-md-3">
+                            <label asp-for="GameItemObj.gameItem.Name"></label>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control" asp-for="GameItemObj.gameItem.Name" />
+                            <span class="text-danger" asp-validation-for="GameItemObj.gameItem.Name"></span>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-md-3">
+                            <label asp-for="GameItemObj.gameItem.Price"></label>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control" asp-for="GameItemObj.gameItem.Price" />
+                            <span class="text-danger" asp-validation-for="GameItemObj.gameItem.Price"></span>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-md-3">
+                            <label asp-for="GameItemObj.gameItem.Description"></label>
+                        </div>
+                        <div class="col-md-9">
+                            <textarea class="form-control" asp-for="GameItemObj.gameItem.Description" id="txtDesc" style="height:200px;"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-md-3">
+                            <label asp-for="GameItemObj.gameItem.Image"></label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="file" class="form-control" name="files" id="files" />
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-md-3">
+                            <label asp-for="GameItemObj.gameItem.TopicId"></label>
+                        </div>
+                        <div class="col-md-9">
+                            @Html.DropDownListFor(m => m.GameItemObj.gameItem.TopicId, Model.GameItemObj.TopicList, "- Please select a Game Topic", new { @class = "form-control" })
+                            <span class="text-danger" asp-validation-for="GameItemObj.gameItem.TopicId"></span>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-md-3">
+                            <label asp-for="GameItemObj.gameItem.GameTypeId"></label>
+                        </div>
+                        <div class="col-md-9">
+                            @Html.DropDownListFor(m => m.GameItemObj.gameItem.GameTypeId, Model.GameItemObj.GameTypeList, "- Please select a Game Type", new { @class = "form-control" })
+                            <span class="text-danger" asp-validation-for="GameItemObj.gameItem.GameTypeId"></span>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-md-9 offset-3">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    @if (Model.GameItemObj.gameItem.Id != 0)
+                                    {
+                                        <button type="submit" class="btn btn-primary form-control">Update</button>
+                                    }
+                                    else
+                                    {
+                                        <button type="submit" class="btn btn-primary form-control" onclick="return ValidateInput()">Create</button>
+                                    }
+                                </div>
+                                <div class="col-md-6">
+                                    <a asp-page="./Index" class="btn btn-success form-control">Back To List</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @if (Model.GameItemObj.gameItem.Image != null)
+                {
+                    <div class="col-md-4 p-4">
+                        <img src="@Model.GameItemObj.gameItem.Image" width="100%" style="border-radius:5px; border:1px solid #bbb9b9;" />
+                    </div>
+                }
+            </div>
+        </div>
+    </form>
+@*}
+else
+{
+    <div>
+        <h1 class="danger">Access Denied</h1>
+    </div>
+}*@
+@section scripts{
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'lists',
+            menubart: 'file edit format'
+        });
+    </script>
+}
