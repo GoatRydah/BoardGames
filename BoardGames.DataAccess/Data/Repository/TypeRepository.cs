@@ -18,7 +18,7 @@ namespace BoardGames.DataAccess.Data.Repository
 
         public IEnumerable<SelectListItem> GetTypeListOrDropdown()
         {
-            return _db.Topic.Select(i => new SelectListItem()
+            return _db.Type.Select(i => new SelectListItem()
             {
                 Text = i.Name,
                 Value = i.Id.ToString()
@@ -27,10 +27,10 @@ namespace BoardGames.DataAccess.Data.Repository
 
         public void Update(Models.Type type)
         {
-            var objFromDb = _db.Topic.FirstOrDefault(s => s.Id == type.Id);
+            var objFromDb = _db.Type.FirstOrDefault(s => s.Id == type.Id);
 
             objFromDb.Name = type.Name;
-            //objFromDb.DisplayOrder = topic.DisplayOrder;
+            //objFromDb.DisplayOrder = type.DisplayOrder;
 
             _db.SaveChanges();
         }

@@ -27,7 +27,7 @@
 
   <ItemGroup>
     <Folder Include="Pages\Manage\Users\" />
-    <Folder Include="wwwroot\images\" />
+    <Folder Include="wwwroot\images\gameItems\" />
   </ItemGroup>
 
 </Project>
