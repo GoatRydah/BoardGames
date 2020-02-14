@@ -1,5 +1,5 @@
 ﻿using BoardGames.DataAccess.Data.Repository.IRepository;
-using BoardGames.DataAccess.Migrations;
+using BoardGames.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

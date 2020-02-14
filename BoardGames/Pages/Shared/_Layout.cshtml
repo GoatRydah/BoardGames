@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using BoardGames.Utility
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -15,9 +17,9 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-info border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand text-white float-left" asp-area="" asp-page="/Customer/Home/Index">
-                    <img src="~/images/die.png" alt="dice" style="width:5%;" />
-                    <span>Board Games</span>
+                <a class="navbar-brand text-white" asp-area="" asp-page="/Customer/Home/Index">
+                    <img src="~/images/die.png" class="mr-1" alt="dice" style="object-fit:scale-down; height:50px; width:50px;"/>
+                    Gametopia
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -26,23 +28,31 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link text-white dropdown-toggle" href="#" id="navbarDropDown" data-toggle="dropdown">
-                                Manage
-                            </a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item text-black" asp-page="/Manage/Topics/Index">Topics</a>
-                                <a class="dropdown-item text-black" asp-page="/Manage/Types/Index">Types</a>
-                                <a class="dropdown-item text-black" asp-page="/Manage/GameItems/Index">Game Items</a>
-                                <a class="dropdown-item text-black" asp-page="/Manage/Users/Index">Users</a>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-page="/Manage/Order/ManagerOrder">Orders</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-page="/Manage/Order/OrderList">Shipping</a>
-                        </li>
+
+                        @if (User.IsInRole(SD.ManagerRole))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link text-white dropdown-toggle" href="#" id="navbarDropDown" data-toggle="dropdown">
+                                    Manage
+                                </a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item text-black" asp-page="/Manage/Topics/Index">Topics</a>
+                                    <a class="dropdown-item text-black" asp-page="/Manage/Types/Index">Types</a>
+                                    <a class="dropdown-item text-black" asp-page="/Manage/GameItems/Index">Game Items</a>
+                                    <a class="dropdown-item text-black" asp-page="/User/Index">Users</a>
+                                </div>
+                            </li>
+                        }
+
+                        @if (User.IsInRole(SD.ManagerRole) || User.IsInRole(SD.StoreClerk))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-page="/Manage/Order/ManagerOrder">Orders</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-page="/Manage/Order/OrderList">Shipping</a>
+                            </li>
+                        }
                         <li>
                             <a class="nav-link text-white" asp-page="/Customer/Cart/Index"><i class="fas fa-shopping-cart"></i>&nbsp; (0)</a>
                         </li>

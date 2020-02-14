@@ -1,7 +1,10 @@
 ﻿@page
 @model BoardGames.UpsertModel
 
+@using BoardGames.Utility
 
+@if (User.IsInRole(SD.ManagerRole))
+{
     <form method="post" asp-action="Upsert">
         <div class="container">
             <div class="row px-2 mx-2 bg-white border">
@@ -11,7 +14,7 @@
                     <input type="hidden" asp-for="TopicObj.Id" />
                 }
                 <div class="col-md-12 px-3" style="border-bottom:1px solid #325d88;">
-                    <h2 class="text-primary">@(Model.TopicObj.Id != 0 ? "Update" : "Create") Topic</h2>
+                    <h2 class="text-info">@(Model.TopicObj.Id != 0 ? "Update" : "Create") Topic</h2>
                 </div>
                 <div class="col-md-8 pt-3">
                     <div class="row form-group">
@@ -28,7 +31,7 @@
                         <div class="col-md-9 offset-3">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <button type="submit" class="btn btn-primary form-control">@(Model.TopicObj.Id != 0 ? "Update" : "Create")</button>
+                                    <button type="submit" class="btn btn-info form-control">@(Model.TopicObj.Id != 0 ? "Update" : "Create")</button>
                                 </div>
                                 <div class="col-md-6">
                                     <a asp-page="./Index" class="btn btn-success form-control">Back To List</a>
@@ -40,4 +43,10 @@
             </div>
         </div>
     </form>
-
+}
+else
+{
+    <div>
+        <h1 class="danger">Access Denied</h1>
+    </div>
+}

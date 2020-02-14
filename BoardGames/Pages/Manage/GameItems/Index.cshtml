@@ -1,12 +1,15 @@
 ﻿@page
+@using BoardGames.Utility
 
+@if (User.IsInRole(SD.ManagerRole))
+{
     <div class="bg-white container border">
         <div class="row">
             <div class="col-md-6">
-                <h2 class="text-primary">Menu Item List</h2>
+                <h2 class="text-info">Menu Item List</h2>
             </div>
             <div class="col-md-6 text-right">
-                <a asp-page="upsert" class="btn btn-primary m-3"><i class="fas fa-plus"></i>&nbsp;Create New</a>
+                <a asp-page="upsert" class="btn btn-info m-3"><i class="fas fa-plus"></i>&nbsp;Create New</a>
             </div>
         </div>
         <br /> <br />
@@ -22,7 +25,13 @@
             </thead>
         </table>
     </div>
-
-@section Scripts{ 
-<script src="~/js/gameitem.js"></script>
+}
+else
+{
+    <div>
+        <h1 class="danger">Access Denied</h1>
+    </div>
+}
+@section Scripts{
+    <script src="~/js/gameitem.js"></script>
 }
