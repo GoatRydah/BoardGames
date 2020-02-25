@@ -19,5 +19,6 @@ namespace BoardGames.DataAccess
         public DbSet<Models.Type> Type { get; internal set; }
         public DbSet<ApplicationUser> ApplicationUser { get; internal set; }
         public DbSet<ShoppingCart> ShoppingCart { get; internal set; }
+        public DbSet<GameNight> GameNight { get; internal set; }
     }
 }

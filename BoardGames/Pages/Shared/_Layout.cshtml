@@ -44,6 +44,8 @@
                             </li>
                         }
 
+                        <a class="dropdown-item text-black" asp-page="/Customer/GameNights/Index">Game Night</a>
+
                         @if (User.IsInRole(SD.ManagerRole) || User.IsInRole(SD.StoreClerk))
                         {
                             <li class="nav-item">

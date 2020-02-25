@@ -12,6 +12,7 @@ namespace BoardGames.DataAccess.Data.Repository
         public IGameItemRepository GameItem { get; private set; }
         public ITypeRepository Type { get; private set; }
         public IApplicationUserRepository ApplicationUser { get; private set; }
+        public IGameNightsRepository GameNights { get; private set; }
 
         //Grabs a connection to the actual db to connect to this class
         public UnitOfWork(ApplicationDbContext db)
@@ -21,6 +22,7 @@ namespace BoardGames.DataAccess.Data.Repository
             GameItem = new GameItemRepository(_db);
             Type = new TypeRepository(_db);
             ApplicationUser = new ApplicationUserRepository(_db);
+            GameNights = new GameNightsRepository(_db);
         }
 
         public void Dispose()

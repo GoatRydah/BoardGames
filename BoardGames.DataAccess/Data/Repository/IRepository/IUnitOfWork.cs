@@ -10,6 +10,7 @@ namespace BoardGames.DataAccess.Data.Repository.IRepository
         IGameItemRepository GameItem { get; }
         ITypeRepository Type { get; }
         IApplicationUserRepository ApplicationUser { get; }
+        IGameNightsRepository GameNights { get; }
 
         void Save();
     }
