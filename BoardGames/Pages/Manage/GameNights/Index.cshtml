@@ -1,0 +1,63 @@
+﻿@page
+@model BoardGames.Pages.Manage.GameNights.IndexModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>GameNights</h1>
+
+<div class="row">
+    <a asp-page="Upsert" class="btn btn-info">Add Game Night</a>
+</div>
+
+<div class="row">
+    <div class="col-md-2">Date</div>
+    <div class="col-md-2">Type</div>
+    <div class="col-md-2">Attendees</div>
+    <div class="col-md-2">Capacity</div>
+    <div class="col-md-2">Manage</div>
+</div>
+
+@*Add for loop here for each game night*@
+@foreach (var gameNight in Model.GameNights)
+{
+    <div class="row" id="gameNaight-id-@gameNight.GameNightId">
+        <div class="col-md-2">@gameNight.GameNightDate</div> 
+        <div class="col-md-2">@gameNight.GameNightType</div> 
+        <div class="col-md-2">@gameNight.Attendees</div>
+        <div class="col-md-2">@(gameNight.GameNightType == "Tournament" ? "16" : "N/A")</div>
+        <div class="col-md-2">
+            <a asp-page="Upsert?id=@gameNight.GameNightId" class="btn btn-success mr-1">Edit</a>
+            <button class="btn btn-danger" onClick=Delete("/api/gameNights/@gameNight.GameNightId"})>Delete</button>
+        </div>
+    </div>
+}
+
+
+<script>
+    function Delete(url) {
+    swal({
+        title: "Are you sure you want to delete?",
+        text: "You will not be able to restore the data!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true
+    }).then((willDelete) => {
+        if (willDelete) {
+            $.ajax({
+                type: 'DELETE',
+                url: url,
+                success: function (data) {
+                    if (data.success) {
+                        toastr.success(data.message);
+                        Location.reload(true);
+                    } else {
+                        toastr.error(data.message);
+                    }
+                }
+            });
+        }
+    });
+}
+</script>

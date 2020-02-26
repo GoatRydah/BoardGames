@@ -5,7 +5,7 @@ using System.Text;
 
 namespace BoardGames.DataAccess.Data.Repository.IRepository
 {
-    public interface IGameNightsRepository
+    public interface IGameNightsRepository : IRepository<GameNight>
     {
         void Update(GameNight gameNight);
     }

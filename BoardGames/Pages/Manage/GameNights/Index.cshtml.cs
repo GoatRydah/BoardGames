@@ -7,19 +7,17 @@ using BoardGames.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace BoardGames
+namespace BoardGames.Pages.Manage.GameNights
 {
-    public class GameNightsModel : PageModel
+    public class IndexModel : PageModel
     {
-
         private readonly IUnitOfWork _unitOfWork;
         public IEnumerable<GameNight> GameNights;
 
-        public GameNightsModel(IUnitOfWork unitOfWork)
+        public IndexModel(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
-     
 
         public void OnGet()
         {
