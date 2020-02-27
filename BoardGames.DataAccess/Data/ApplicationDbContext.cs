@@ -20,5 +20,7 @@ namespace BoardGames.DataAccess
         public DbSet<ApplicationUser> ApplicationUser { get; internal set; }
         public DbSet<ShoppingCart> ShoppingCart { get; internal set; }
         public DbSet<GameNight> GameNight { get; internal set; }
+        public DbSet<OrderHeader> OrderHeader { get; internal set; }
+        public DbSet<OrderDetails> OrderDetails { get; internal set; }
     }
 }

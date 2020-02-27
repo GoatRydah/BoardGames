@@ -1,4 +1,6 @@
 ﻿@using BoardGames.Utility
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContentAccessor
 
 <!DOCTYPE html>
 <html lang="en">
@@ -18,7 +20,7 @@
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-info border-bottom box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand text-white" asp-area="" asp-page="/Customer/Home/Index">
-                    <img src="~/images/die.png" class="mr-1" alt="dice" style="object-fit:scale-down; height:50px; width:50px;"/>
+                    <img src="~/images/die.png" class="mr-1" alt="dice" style="object-fit:scale-down; height:50px; width:50px;" />
                     Gametopia
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -56,9 +58,24 @@
                                 <a class="nav-link text-white" asp-page="/Manage/Order/OrderList">Shipping</a>
                             </li>
                         }
-                        <li>
-                            <a class="nav-link text-white" asp-page="/Customer/Cart/Index"><i class="fas fa-shopping-cart"></i>&nbsp; (0)</a>
-                        </li>
+                        @if (HttpContentAccessor.HttpContext.Session.GetInt32(SD.ShoppingCart) != null)
+                        {
+
+                            <li>
+                                <a class="nav-link text-white" asp-page="/Customer/Cart/Index">
+                                    @{ var count = HttpContentAccessor.HttpContext.Session.GetInt32(SD.ShoppingCart); }
+                                    <i class="fas fa-shopping-cart"></i>&nbsp;(@count)
+                                </a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li>
+                                <a class="nav-link text-white" asp-page="/Customer/Cart/Index">
+                                    <i class="fas fa-shopping-cart"></i>&nbsp; (0)
+                                </a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>

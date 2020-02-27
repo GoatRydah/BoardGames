@@ -13,6 +13,9 @@ namespace BoardGames.DataAccess.Data.Repository
         public ITypeRepository Type { get; private set; }
         public IApplicationUserRepository ApplicationUser { get; private set; }
         public IGameNightsRepository GameNights { get; private set; }
+        public IShoppingCartRepository ShoppingCart { get; private set; }
+        public IOrderHeaderRepository OrderHeader { get; private set; }
+        public IOrderDetailsRepository OrderDetails { get; private set; }
 
         //Grabs a connection to the actual db to connect to this class
         public UnitOfWork(ApplicationDbContext db)
@@ -23,6 +26,9 @@ namespace BoardGames.DataAccess.Data.Repository
             Type = new TypeRepository(_db);
             ApplicationUser = new ApplicationUserRepository(_db);
             GameNights = new GameNightsRepository(_db);
+            ShoppingCart = new ShoppingCartRepository(_db);
+            OrderHeader = new OrderHeaderRepository(_db);
+            OrderDetails = new OrderDetailsRepository(_db);
         }
 
         public void Dispose()

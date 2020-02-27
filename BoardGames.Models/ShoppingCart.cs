@@ -15,8 +15,7 @@ namespace BoardGames.Models
 
         public int Id { get; set; }
         public int GameItemId { get; set; }
-        [Range(1, 100, ErrorMessage = "Please select a count between 1 and 100"
-            )]
+        [Range(1, 100, ErrorMessage = "Please select a count between 1 and 100")]
         public int Count { get; set; }
         public string ApplicationUserId { get; set; }
 

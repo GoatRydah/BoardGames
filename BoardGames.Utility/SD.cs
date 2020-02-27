@@ -7,5 +7,6 @@ namespace BoardGames.Utility
         public const string ManagerRole = "Manager";
         public const string StoreClerk = "Store Clerk";
         public const string CustomerRole = "Customer";
+        public const string ShoppingCart = "ShoppingCart";
     }
 }
