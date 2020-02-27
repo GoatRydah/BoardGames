@@ -1,0 +1,18 @@
+﻿@page
+@model BoardGames.Pages.Customer.Cart.OrderConfirmationModel
+@{
+    ViewData["Title"] = "Order Confirmation";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12 text-center">
+        <h1 class="text-primary text-center">Order Placed Successfully!</h1>
+        Your Order Number is: @Model.OrderId <br /> <br />
+        <img src="~/images/die.png" alt="Gametopia Logo" width="65%" />
+    </div>
+    <div class="col-md-12 text-center text-success">
+        <br />
+        Your Order has been placed successfully! <br />
+    </div>
+</div>

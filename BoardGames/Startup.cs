@@ -14,6 +14,8 @@ using Microsoft.Extensions.Hosting;
 using BoardGames.DataAccess;
 using BoardGames.DataAccess.Data.Repository.IRepository;
 using BoardGames.DataAccess.Data.Repository;
+using Stripe;
+using BoardGames.Utility;
 
 namespace BoardGames
 {
@@ -46,6 +48,7 @@ namespace BoardGames
                 options.Cookie.IsEssential = true;
 
             });
+            services.Configure<StripeSettings>(Configuration.GetSection("Stripe"));
             services.AddRazorPages().AddRazorRuntimeCompilation();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
         }
@@ -75,6 +78,7 @@ namespace BoardGames
             app.UseAuthorization();
 
             app.UseMvc();
+            StripeConfiguration.ApiKey = Configuration.GetSection("Stripe")["SecretKey"];
         }
     }
 }

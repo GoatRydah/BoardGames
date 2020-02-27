@@ -30,5 +30,8 @@ namespace BoardGames.DataAccess.Data.Repository.IRepository
 
         //Remove by object
         void Remove(T entity);
+
+        //Remove list of objects
+        void RemoveRange(IEnumerable<T> entity);
     }
 }
