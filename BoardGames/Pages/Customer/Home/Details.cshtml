@@ -6,39 +6,39 @@
 }
 
 
-<div class="">
+<div class="mt-5">
     <form method="post">
         <input type="hidden" asp-for="ShoppingCartObj.GameItemId" />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="container backgroundWhite">
             <div class="card">
-                <div class="card-header bg-light text-light ml-0 row container">
+                <div class="card-header bg-secondary text-light ml-0 row container">
                     <div class="col-12 col-md-6">
-                        <h1 class="text-primary">@Model.ShoppingCartObj.GameItem.Name</h1>
+                        <h1 class="text-white">@Model.ShoppingCartObj.GameItem.Name</h1>
                     </div>
                     <div class="col-12 col-md-6 text-md-right">
-                        <h1 class="text-muted"> @((Model.ShoppingCartObj.GameItem.Price).ToString("c"))</h1>
+                        <h1 class="text-white"> @((Model.ShoppingCartObj.GameItem.Price).ToString("c"))</h1>
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body bg-light">
                     <div class="container rounded p-2">
                         <div class="row">
                             <div class="col-12 col-lg-8">
                                 <div class="row">
 
                                     <div class="col-12">
-                                        <span class="badge badge-warning h3">@Model.ShoppingCartObj.GameItem.Topic.Name</span>
-                                        <span class="badge badge-dark">@Model.ShoppingCartObj.GameItem.Type.Name</span>
+                                        <span class="h3 text-black-50">Description:</span>
+                                        <hr />
                                         <h3 class="text-success"></h3>
 
                                         <div class="text-black-50">
                                             @Html.Raw(Model.ShoppingCartObj.GameItem.Description)
                                         </div>
 
-                                        <div class="row py-4">
-                                            <div class="col-2"><label asp-for="ShoppingCartObj.Count" class="h3 text-black-50"></label></div>
+                                        <div class="row">
+                                            <div class="col-2"><label asp-for="ShoppingCartObj.Count" class="h3 text-black-50">Quantity: </label></div>
                                             <div class="col-2">
-                                                <input type="number" asp-for="ShoppingCartObj.Count" class="form-control rounded" />
+                                                <input type="number" asp-for="ShoppingCartObj.Count" class="form-control rounded ml-2" />
                                                 <span asp-validation-for="ShoppingCartObj.Count" class="text-danger"></span>
                                             </div>
                                         </div>
@@ -47,28 +47,28 @@
                                 </div>
                             </div>
                             <div class="col-12 col-lg-4 p-1 text-center">
-                                <img src="@Model.ShoppingCartObj.GameItem.Image" width="100%" class="rounded" />
+                                <img src="@Model.ShoppingCartObj.GameItem.Image" width="80%" class="rounded" />
                             </div>
 
 
                         </div>
                     </div>
                 </div>
-                <div class="card-footer">
+                <div class="card-footer bg-">
                     <div class="row">
-                        <div class="col-12 col-md-6 pb-1 ">
-                            <a asp-page="Index" class="btn btn-success btn-square form-control btn-lg" style="height:50px;">Back to List</a>
+                        <div class="col-12 col-md-3 pb-1 ">
+                            <a asp-page="Index" class="btn btn-warning btn-square form-control btn-lg text-white" style="height:50px;">Back</a>
                         </div>
                         @if (User.IsInRole(SD.ManagerRole) || User.IsInRole(SD.StoreClerk) || User.IsInRole(SD.CustomerRole))
                         {
-                            <div class="col-12 col-md-6 ">
-                                <button type="submit" class="btn btn-primary btn-square form-control btn-lg" style="height:50px;">Add to Cart</button>
+                            <div class="col-12 col-md-9 ">
+                                <button type="submit" class="btn btn-success btn-square form-control btn-lg" style="height:50px;">Add to Cart</button>
                             </div>
                         }
                         else
                         {
-                            <div class="col-12 col-md-6 ">
-                                <button type="submit" class="btn btn-primary btn-square form-control btn-lg" style="height:50px;" disabled>Please Login to Add to Cart</button>
+                            <div class="col-12 col-md-9 ">
+                                <button type="submit" class="btn btn-success btn-square form-control btn-lg" style="height:50px;" disabled>Please Login to Add to Cart</button>
                             </div>
                         }
                     </div>

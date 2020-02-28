@@ -3,23 +3,25 @@
 
 @using BoardGames.Utility
 
+    <hr />
+
 @if (User.IsInRole(SD.ManagerRole))
 {
     <form method="post" asp-action="Upsert" enctype="multipart/form-data">
         <div class="container">
-            <div class="row px-2 mx-2 bg-white border">
+            <div class="row px-2 mx-2 bg-secondary border">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 @if (Model.GameItemObj.gameItem.Id != 0)
                 {
                     <input type="hidden" asp-for="GameItemObj.gameItem.Id" />
                 }
                 <div class="col-md-12 px-3" style="border-bottom:1px solid #325d88;">
-                    <h2 class="text-info">@(Model.GameItemObj.gameItem.Id != 0 ? "Update" : "Create") Game Item</h2>
+                    <h2 class="text-white">@(Model.GameItemObj.gameItem.Id != 0 ? "Update" : "Create") Game Item</h2>
                 </div>
-                <div class="col-md-8 pt-3">
+                <div class="col-md-10 pt-3">
                     <div class="row form-group">
                         <div class="col-md-3">
-                            <label class="text-black-50" asp-for="GameItemObj.gameItem.Name"></label>
+                            <label class="text-white" asp-for="GameItemObj.gameItem.Name"></label>
                         </div>
                         <div class="col-md-9">
                             <input class="form-control" asp-for="GameItemObj.gameItem.Name" />
@@ -29,7 +31,7 @@
 
                     <div class="row form-group">
                         <div class="col-md-3">
-                            <label class="text-black-50" asp-for="GameItemObj.gameItem.Price"></label>
+                            <label class="text-white" asp-for="GameItemObj.gameItem.Price"></label>
                         </div>
                         <div class="col-md-9">
                             <input class="form-control" asp-for="GameItemObj.gameItem.Price" />
@@ -39,7 +41,7 @@
 
                     <div class="row form-group">
                         <div class="col-md-3">
-                            <label class="text-black-50" asp-for="GameItemObj.gameItem.Description"></label>
+                            <label class="text-white" asp-for="GameItemObj.gameItem.Description"></label>
                         </div>
                         <div class="col-md-9">
                             <textarea class="form-control" asp-for="GameItemObj.gameItem.Description" id="txtDesc" style="height:200px;"></textarea>
@@ -48,7 +50,7 @@
 
                     <div class="row form-group">
                         <div class="col-md-3">
-                            <label class="text-black-50" asp-for="GameItemObj.gameItem.Image"></label>
+                            <label class="text-white" asp-for="GameItemObj.gameItem.Image"></label>
                         </div>
                         <div class="col-md-9">
                             <input type="file" class="form-control" name="files" id="files" />
@@ -57,7 +59,7 @@
 
                     <div class="row form-group">
                         <div class="col-md-3">
-                            <label class="text-black-50" asp-for="GameItemObj.gameItem.TopicId"></label>
+                            <label class="text-white" asp-for="GameItemObj.gameItem.TopicId"></label>
                         </div>
                         <div class="col-md-9">
                             @Html.DropDownListFor(m => m.GameItemObj.gameItem.TopicId, Model.GameItemObj.TopicList, "- Please select a Game Topic", new { @class = "form-control" })
@@ -67,7 +69,7 @@
 
                     <div class="row form-group">
                         <div class="col-md-3">
-                            <label class="text-black-50" asp-for="GameItemObj.gameItem.GameTypeId"></label>
+                            <label class="text-white" asp-for="GameItemObj.gameItem.GameTypeId"></label>
                         </div>
                         <div class="col-md-9">
                             @Html.DropDownListFor(m => m.GameItemObj.gameItem.GameTypeId, Model.GameItemObj.GameTypeList, "- Please select a Game Type", new { @class = "form-control" })
@@ -78,18 +80,18 @@
                     <div class="row form-group">
                         <div class="col-md-9 offset-3">
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-3">
+                                    <a asp-page="./Index" class="btn btn-warning form-control text-white">Back</a>
+                                </div>
+                                <div class="col-md-9">
                                     @if (Model.GameItemObj.gameItem.Id != 0)
                                     {
-                                        <button type="submit" class="btn btn-info form-control">Update</button>
+                                        <button type="submit" class="btn btn-success form-control">Update</button>
                                     }
                                     else
                                     {
-                                        <button type="submit" class="btn btn-info form-control" onclick="return ValidateInput()">Create</button>
+                                        <button type="submit" class="btn btn-success form-control" onclick="return ValidateInput()">Create</button>
                                     }
-                                </div>
-                                <div class="col-md-6">
-                                    <a asp-page="./Index" class="btn btn-success form-control">Back To List</a>
                                 </div>
                             </div>
                         </div>

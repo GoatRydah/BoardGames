@@ -1,6 +1,21 @@
 ﻿@page
 @model BoardGames.Pages.Customer.Home.IndexModel
 
+<div class="jumbotron text-black-50 mt-5">
+    <div>
+        <div class="row">
+            <div class="col-md-10">
+                <h3 class="mt-3"><span class="h2"><b>Welcome</b></span> to Gametopia, Your Home for all things Board Games!</h3>
+            </div>
+            <div class="col-md-2">
+                <img src="~/images/die.png" alt="dice" style="object-fit:scale-down; height:70px; width:70px;" />
+            </div>
+        </div>
+    </div>
+</div>
+<p class="">Can't find a game below? Let us know and we'll add it to our inventory!</p>
+<hr class="bg-white" />
+
 @foreach (var topic in Model.TopicList)
 {
     if (Model.GameItemList.Where(c => c.TopicId == topic.Id).Count() > 0)
@@ -8,28 +23,30 @@
         <div class="row container-fluid pb-3 backgroundWhite">
             <div class="col-md-12">
                 <div class="row">
-                    <h2 class="text-info pl-1 "><b>@topic.Name</b></h2>
+                    <h2 class="text-white pl-1 "><b>@topic.Name Games</b></h2>
                     <div class="col-md-12">
                         <div class="row my-3">
                             @foreach (var gameitem in Model.GameItemList.Where(c => c.TopicId == topic.Id))
                             {
-                                <div class="col-lg-4 col-xl-4 col-md-6 pb-4">
-                                    <div class="card" style="border: 2px solid #008cba; border-radius: 5px;">
-                                        <div class="pl-3 pt-1 text-center h3"><h3 class="card-title text-info"><b>@gameitem.Name</b></h3></div>
-                                        <div class="card-body">
-                                            <div class="d-flex justify-content-between form-control" style="border:0px;">
-                                                <div class="col-md-6 badge-warning text-center" style="font-size:14px;"><b>@gameitem.Topic.Name</b></div>
-                                                <div class="col-md-6 text-right h5" style="color:maroon;"><b>$@gameitem.Price.ToString("0.00")</b></div>
+                                <div class="col-lg-3 col-xl-3 col-md-6 pb-4">
+                                    <div class="card bg-white" style="border: 2px solid #008cba; border-radius: 5px;">
+                                        <a asp-page="Details" class="btn" style="border-radius:2px;" asp-route-id="@gameitem.Id">
+                                            <div class="card-header bg-info">
+                                                <div class="pt-1 text-center h3"><h5 class="card-title text-white"><b>@gameitem.Name</b></h5></div>
                                             </div>
-                                            <div class="row">
-                                                <div class="col-md-2"></div>
-                                                <div class="col-md-8">
-                                                    <img src="@gameitem.Image" class="card-img p-2 rounded" style="object-fit:scale-down; height:200px; width:200px;" />
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-md-2"></div>
+                                                    <div class="col-md-8 d-flex justify-content-center">
+                                                        <img src="@gameitem.Image" class="card-img p-2 rounded m-auto" style="object-fit:scale-down; height:150px; width:150px;" />
+                                                    </div>
+                                                    <div class="col-md-2"></div>
                                                 </div>
-                                                <div class="col-md-2"></div>
                                             </div>
-                                        </div>
-                                        <a asp-page="Details" class="btn btn-info" style="border-radius:2px;" asp-route-id="@gameitem.Id">Details</a>
+                                            <div class="card-footer bg-info text-white">
+                                                <b>$@gameitem.Price.ToString("0.00")</b>
+                                            </div>
+                                        </a>
                                     </div>
                                 </div>
                             }

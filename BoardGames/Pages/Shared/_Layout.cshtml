@@ -18,78 +18,83 @@
 
 </head>
 <body class="bg-dark text-light">
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-info border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand text-white" asp-area="" asp-page="/Customer/Home/Index">
-                    <img src="~/images/die.png" class="mr-1" alt="dice" style="object-fit:scale-down; height:50px; width:50px;" />
-                    Gametopia
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <partial name="_LoginPartial" />
-                    <ul class="navbar-nav flex-grow-1">
+    <header class="fixed-top">
 
-                        @if (User.IsInRole(SD.ManagerRole))
-                        {
-                            <li class="nav-item dropdown">
-                                <a class="nav-link text-white dropdown-toggle" href="#" id="navbarDropDown" data-toggle="dropdown">
-                                    Manage
-                                </a>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item text-black" asp-page="/Manage/Topics/Index">Topics</a>
-                                    <a class="dropdown-item text-black" asp-page="/Manage/Types/Index">Types</a>
-                                    <a class="dropdown-item text-black" asp-page="/Manage/GameItems/Index">Game Items</a>
-                                    <a class="dropdown-item text-black" asp-page="/Manage/GameNights/Index">Game Nights</a>
+        <nav class="navbar navbar-expand-lg navbar-light bg-info">
+            <a class="navbar-brand text-white" asp-area="" asp-page="/Customer/Home/Index">
+                <img src="~/images/die.png" class="mr-1" alt="dice" style="object-fit:scale-down; height:30px; width:30px;" />
+                Gametopia
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-bars text-white"></i>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" asp-page="/Customer/GameNights/GameNights">Game Night</a>
+                            <a class="dropdown-item" asp-page="/Customer/Cart/Index">Shopping Cart</a>
+                        </div>
+                    </li>
+                    @if (User.IsInRole(SD.ManagerRole) || User.IsInRole(SD.StoreClerk))
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Admin
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item text-black" asp-page="/Manage/Topics/Index">Topics</a>
+                                <a class="dropdown-item text-black" asp-page="/Manage/Types/Index">Types</a>
+                                <a class="dropdown-item text-black" asp-page="/Manage/GameItems/Index">Game Items</a>
+                                <a class="dropdown-item text-black" asp-page="/Manage/GameNights/Index">Game Nights</a>
+                                @if (User.IsInRole(SD.ManagerRole))
+                                {
                                     <a class="dropdown-item text-black" asp-page="/User/Index">Users</a>
-                                </div>
-                            </li>
-                        }
+                                }
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item text-black" asp-page="/Manage/Order/ManagerOrder">Orders</a>
+                                <a class="dropdown-item text-black" asp-page="/Manage/Order/OrderList">Shipping</a>
+                            </div>
+                        </li>
+                    }
+                </ul>
+                <div class="form-inline my-2 my-lg-0">
+                    @if (HttpContentAccessor.HttpContext.Session.GetInt32(SD.ShoppingCart) != null)
+                    {
 
-                        <a class="dropdown-item text-black" asp-page="/Customer/GameNights/GameNights">Game Night</a>
-
-                        @if (User.IsInRole(SD.ManagerRole) || User.IsInRole(SD.StoreClerk))
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-white" asp-page="/Manage/Order/ManagerOrder">Orders</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-white" asp-page="/Manage/Order/OrderList">Shipping</a>
-                            </li>
-                        }
-                        @if (HttpContentAccessor.HttpContext.Session.GetInt32(SD.ShoppingCart) != null)
-                        {
-
-                            <li>
-                                <a class="nav-link text-white" asp-page="/Customer/Cart/Index">
-                                    @{ var count = HttpContentAccessor.HttpContext.Session.GetInt32(SD.ShoppingCart); }
-                                    <i class="fas fa-shopping-cart"></i>&nbsp;(@count)
-                                </a>
-                            </li>
-                        }
-                        else
-                        {
-                            <li>
-                                <a class="nav-link text-white" asp-page="/Customer/Cart/Index">
-                                    <i class="fas fa-shopping-cart"></i>&nbsp; (0)
-                                </a>
-                            </li>
-                        }
-                    </ul>
+                        <div class="">
+                            <a class="nav-link text-white" asp-page="/Customer/Cart/Index">
+                                @{ var count = HttpContentAccessor.HttpContext.Session.GetInt32(SD.ShoppingCart); }
+                                <i class="fas fa-shopping-cart"></i>&nbsp;(@count)
+                            </a>
+                        </div>
+                    }
+                    else
+                    {
+                        <div>
+                            <a class="nav-link text-white" asp-page="/Customer/Cart/Index">
+                                <i class="fas fa-shopping-cart"></i>&nbsp; (0)
+                            </a>
+                        </div>
+                    }
+                    <partial name="_LoginPartial" />
                 </div>
             </div>
         </nav>
     </header>
+    <hr />
+    <hr class="mb-1" />
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer bg-info text-white">
+    <footer class="footer small bg-info text-white">
         <div class="container">
             &copy; 2020 - Board Games - <a asp-area="" asp-page="/Privacy">Privacy</a>
         </div>
