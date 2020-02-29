@@ -1,30 +1,68 @@
 ﻿@page
-@model BoardGames.GameNightsModel
+@model BoardGames.Pages.Customer.GameNights.GameNightsModel
 @{
     ViewData["Title"] = "GameNights";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-    <hr />
+<hr />
+<br />
 
-<h1>GameNights</h1>
-
-<div class="row">
-    <div class="col-md-2">Date</div> @*date of game night*@
-    <div class="col-md-2">Type</div> @*type: open - tournament*@
-    <div class="col-md-2">Attendees</div> @*number of attendees - tournys have sign ups*@
-    <div class="col-md-2">Capacity</div> @*How many people can join*@
-    <div class="col-md-4">Join</div> @*join if spots are available.*@
+<div class="jumbotron">
+    <h4 class="text-black-50">Want to come to a game night? Let us know if you can make it by joining below!</h4>
 </div>
 
-@*Add for loop here for each game night*@
-@foreach (var gameNight in Model.GameNights)
+<div class="row mb-2">
+    <div class="col-md-2 h4">Date</div> @*date of game night*@
+    <div class="col-md-3 h4">Type</div> @*type: open - tournament*@
+    <div class="col-md-2 h4">Attendees</div> @*number of attendees - tournys have sign ups*@
+    <div class="col-md-2 h4">Capacity</div> @*How many people can join*@
+    <div class="col-md-3 h4">Join</div> @*join if spots are available.*@
+</div>
+
+
+@*for loop for each game night*@
+@foreach (var gameNight in Model.GameNights.gameNight)
 {
-    <div class="row" id="gameNaight-id-@gameNight.GameNightId">
+    var atts = Model.GameNights.attendees.Where(s => s.GameNightId == gameNight.GameNightId && s.username == HttpContext.User.Identity.Name).FirstOrDefault();
+    bool userInGameNight;
+    if (atts != null)
+    {
+        userInGameNight = true;
+    }
+    else
+    {
+        userInGameNight = false;
+    }
+
+    <div class="row my-1" id="gameNaight-id-@gameNight.GameNightId">
         <div class="col-md-2">@gameNight.GameNightDate</div> @*date of game night*@
-        <div class="col-md-2">@gameNight.GameNightType</div> @*type: open - tournament*@
+        <div class="col-md-3">@gameNight.GameNightType</div> @*type: open - tournament*@
         <div class="col-md-2">@gameNight.Attendees</div> @*number of attendees - tournys have sign ups*@
-        <div class="col-md-2">@(gameNight.GameNightType == "Tournament" ? "16" : "N/A")</div> @*How many people can join*@
-        <div class="col-md-4">Join</div> @*join if spots are available.*@
+        <div class="col-md-2">@gameNight.Capacity</div> @*How many people can join*@
+
+        <div class="col-md-3">
+            <form method="post" asp-action="OnPost" enctype="multipart/form-data">
+                <input type="text" name="gameNightId" value="@gameNight.GameNightId" hidden />
+                <input type="text" name="userName" value="@HttpContext.User.Identity.Name" hidden />
+                @if (HttpContext.User.Identity.Name == "" || HttpContext.User.Identity.Name == null)
+                {
+                    <button type="submit" class="btn btn-info" disabled>Must Log In</button> @*join if spots are available.*@
+                }
+                else if (gameNight.Attendees < gameNight.Capacity && !userInGameNight)
+                {
+                    <button type="submit" class="btn btn-info">Join</button> @*join if spots are available.*@
+                }
+                else if (userInGameNight)
+                {
+                    <button type="submit" class="btn btn-info" disabled>Joined</button>
+                }
+                else
+                {
+                    <button type="submit" class="btn btn-info" disabled>Full</button> @*join if spots are available.*@
+                }
+            </form>
+        </div>
     </div>
 }
+    

@@ -4,14 +4,16 @@ using BoardGames.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BoardGames.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200229164038_CapacityForGameNights")]
+    partial class CapacityForGameNights
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -76,31 +78,6 @@ namespace BoardGames.DataAccess.Migrations
                     b.HasKey("GameNightId");
 
                     b.ToTable("GameNight");
-                });
-
-            modelBuilder.Entity("BoardGames.Models.GameNightAttendees", b =>
-                {
-                    b.Property<int>("AttendeeId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("GameNightId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("username")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("AttendeeId");
-
-                    b.HasIndex("GameNightId");
-
-                    b.HasIndex("Id");
-
-                    b.ToTable("GameNightAttendees");
                 });
 
             modelBuilder.Entity("BoardGames.Models.OrderDetails", b =>
@@ -459,19 +436,6 @@ namespace BoardGames.DataAccess.Migrations
                         .HasForeignKey("TopicId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("BoardGames.Models.GameNightAttendees", b =>
-                {
-                    b.HasOne("BoardGames.Models.GameNight", "GameNight")
-                        .WithMany()
-                        .HasForeignKey("GameNightId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BoardGames.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("Id");
                 });
 
             modelBuilder.Entity("BoardGames.Models.OrderDetails", b =>

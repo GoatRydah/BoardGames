@@ -20,7 +20,7 @@ namespace BoardGames.DataAccess.Data.Repository
         {
             var objFromDb = _db.GameNight.FirstOrDefault(s => s.GameNightId == gameNight.GameNightId);
 
-            objFromDb.Attendees = gameNight.Attendees;
+            objFromDb.Attendees = _db.GameNightAttendees.Where(s => s.GameNightId == gameNight.GameNightId).Select(s => s.username).Count();
             objFromDb.GameNightDate = gameNight.GameNightDate;
             objFromDb.GameNightType = gameNight.GameNightType;
 

@@ -11,6 +11,7 @@ namespace BoardGames.DataAccess.Data.Repository.IRepository
         ITypeRepository Type { get; }
         IApplicationUserRepository ApplicationUser { get; }
         IGameNightsRepository GameNights { get; }
+        IAttendeesRepository Attendees { get; }
         IShoppingCartRepository ShoppingCart { get; }
         IOrderHeaderRepository OrderHeader { get; }
         IOrderDetailsRepository OrderDetails { get; }

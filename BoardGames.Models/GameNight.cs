@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace BoardGames.Models
@@ -10,5 +11,7 @@ namespace BoardGames.Models
         public DateTime GameNightDate { get; set; }
         public string GameNightType { get; set; }
         public int Attendees { get; set; }
+        public int Capacity { get; set; }
+
     }
 }
