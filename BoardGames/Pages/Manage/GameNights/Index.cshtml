@@ -10,28 +10,37 @@
 <h1>GameNights</h1>
 
 <div class="row">
-    <a asp-page="upsert" class="btn btn-info col-md-6 offset-md-6">Add Game Night</a>
+    <a asp-page="upsert" class="btn btn-info col-md-4 offset-md-8 my-3">Add Game Night</a>
 </div>
 
-<div class="row">
-    <div class="col-md-2">Date</div>
-    <div class="col-md-2">Type</div>
-    <div class="col-md-2">Attendees</div>
-    <div class="col-md-2">Capacity</div>
-    <div class="col-md-2">Manage</div>
+<div class="row mb-2">
+    <div class="col-md-2 h4">Date</div>
+    <div class="col-md-2 h4">Type</div>
+    <div class="col-md-2 h4">Attendees</div>
+    <div class="col-md-2 h4">Capacity</div>
+    <div class="col-md-4 h4">Manage</div>
 </div>
 
 @*Add for loop here for each game night*@
 @foreach (var gameNight in Model.GameNights)
 {
-    <div class="row" id="gameNaight-id-@gameNight.GameNightId">
+    <div class="row my-1" id="gameNaight-id-@gameNight.GameNightId">
         <div class="col-md-2">@gameNight.GameNightDate</div> 
         <div class="col-md-2">@gameNight.GameNightType</div> 
         <div class="col-md-2">@gameNight.Attendees</div>
-        <div class="col-md-2">@(gameNight.GameNightType == "Tournament" ? "16" : "N/A")</div>
-        <div class="col-md-2">
-            <a asp-page="Upsert?id=@gameNight.GameNightId" class="btn btn-success mr-1">Edit</a>
-            <button class="btn btn-danger" onClick=Delete("/api/gameNights/@gameNight.GameNightId"})>Delete</button>
+        <div class="col-md-2">@gameNight.Capacity</div>
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-2">
+                    <form action="/Manage/GameNights/upsert" method="get">
+                        <input type="text" name="id" value="@gameNight.GameNightId" hidden />
+                        <input type="submit" class="btn btn-success mr-1" value="Edit" />
+                    </form>
+                </div>
+                <div class="col-md-10">
+                    <button class="btn btn-danger" onClick=Delete("/api/gameNight/@gameNight.GameNightId")>Delete</button>
+                </div>
+            </div>
         </div>
     </div>
 }
@@ -39,6 +48,8 @@
 
 <script>
     function Delete(url) {
+        var host = window.location.host;
+
     swal({
         title: "Are you sure you want to delete?",
         text: "You will not be able to restore the data!",
@@ -53,7 +64,7 @@
                 success: function (data) {
                     if (data.success) {
                         toastr.success(data.message);
-                        Location.reload(true);
+                        window.location.reload();
                     } else {
                         toastr.error(data.message);
                     }

@@ -30,7 +30,7 @@ namespace BoardGames.Pages.Customer.GameNights
 
             GameNights = new GameNightVM();
 
-            GameNights.gameNight = _unitOfWork.GameNights.GetAll().ToList();
+            GameNights.gameNight = _unitOfWork.GameNights.GetAll().OrderBy(s => s.GameNightDate).ToList();
             GameNights.attendees = _unitOfWork.Attendees.GetAll().ToList();
         }
 

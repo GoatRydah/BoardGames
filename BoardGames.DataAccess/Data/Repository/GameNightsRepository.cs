@@ -23,6 +23,7 @@ namespace BoardGames.DataAccess.Data.Repository
             objFromDb.Attendees = _db.GameNightAttendees.Where(s => s.GameNightId == gameNight.GameNightId).Select(s => s.username).Count();
             objFromDb.GameNightDate = gameNight.GameNightDate;
             objFromDb.GameNightType = gameNight.GameNightType;
+            objFromDb.Capacity = gameNight.Capacity;
 
             _db.SaveChanges();
         }

@@ -33,17 +33,32 @@ namespace BoardGames.Pages.Manage.GameNights
             return Page();
         }
 
-        public IActionResult OnPost(GameNight gNight)
+        public IActionResult OnPost(int id, DateTime date, string type, int capacity, string creating)
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            _unitOfWork.GameNights.Add(gNight);
-            _unitOfWork.Save();
+            GameNight gNight = new GameNight();
+            gNight.GameNightId = id;
+            gNight.GameNightDate = date;
+            gNight.GameNightType = type;
+            gNight.Capacity = capacity;
+            gNight.Attendees = 0;
 
-            return RedirectToAction("Index");
+            if (creating == "creating")
+            {
+                _unitOfWork.GameNights.Add(gNight);
+                _unitOfWork.Save();
+            }
+            else
+            {
+                _unitOfWork.GameNights.Update(gNight);
+                _unitOfWork.Save();
+            }
+
+            return RedirectToPage("/Manage/GameNights/Index");
         }
     }
 }

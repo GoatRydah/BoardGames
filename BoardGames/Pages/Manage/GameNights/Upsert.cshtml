@@ -18,7 +18,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             @if (Model.gameNight.GameNightId != 0)
             {
-                <input type="hidden" asp-for="gameNight.GameNightId" />
+                <input type="hidden" name="id" asp-for="gameNight.GameNightId" />
             }
             <div class="col-md-12 px-3" style="border-bottom:1px solid #325d88;">
                 <h2 class="text-info">@(Model.gameNight.GameNightId != 0 ? "Update" : "Create") Game Night</h2>
@@ -29,7 +29,7 @@
                         <label class="text-black-50" asp-for="gameNight.GameNightDate"></label>
                     </div>
                     <div class="col-md-9">
-                        <input class="form-control" asp-for="gameNight.GameNightDate" />
+                        <input class="form-control" name="date" asp-for="gameNight.GameNightDate" />
                         <span class="text-danger" asp-validation-for="gameNight.GameNightDate"></span>
                     </div>
                 </div>
@@ -39,18 +39,18 @@
                         <label class="text-black-50" asp-for="gameNight.GameNightType"></label>
                     </div>
                     <div class="col-md-9">
-                        <input class="form-control" asp-for="gameNight.GameNightType" />
+                        <input class="form-control" name="type" asp-for="gameNight.GameNightType" />
                         <span class="text-danger" asp-validation-for="gameNight.GameNightType"></span>
                     </div>
                 </div>
 
                 <div class="row form-group">
                     <div class="col-md-3">
-                        <label class="text-black-50" asp-for="gameNight.Attendees"></label>
+                        <label class="text-black-50" asp-for="gameNight.Capacity"></label>
                     </div>
                     <div class="col-md-9">
-                        <input class="form-control" asp-for="gameNight.Attendees" />
-                        <span class="text-danger" asp-validation-for="gameNight.Attendees"></span>
+                        <input class="form-control"  name="capacity" asp-for="gameNight.Capacity" />
+                        <span class="text-danger" asp-validation-for="gameNight.Capacity"></span>
                     </div>
                 </div>
 
@@ -60,10 +60,12 @@
                             <div class="col-md-6">
                                 @if (Model.gameNight.GameNightId != 0)
                                 {
+                                    <input type="text" name="creating" value="Editing" hidden />
                                     <button type="submit" class="btn btn-info form-control">Update</button>
                                 }
                                 else
                                 {
+                                    <input type="text" name="creating" value="creating" hidden />
                                     <button type="submit" class="btn btn-info form-control">Create</button>
                                 }
                             </div>
